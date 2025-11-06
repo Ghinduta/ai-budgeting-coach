@@ -1,0 +1,30 @@
+name: Backend CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-backend:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup .NET 8
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Restore dependencies
+      run: dotnet restore BudgetCoach.sln
+
+    - name: Build solution
+      run: dotnet build BudgetCoach.sln --no-restore --configuration Release
+
+    # Placeholder for future: Unit tests
+    # - name: Run tests
+    #   run: dotnet test BudgetCoach.sln --no-build --verbosity normal

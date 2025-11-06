@@ -1,0 +1,58 @@
+AI Budgeting Coach - Monorepo Structure
+=========================================
+
+ai-budgeting-coach/
+├── .bmad-core/              # BMAD workflow configuration
+├── .claude/                 # Claude Code configuration
+├── docs/                    # Documentation
+│   ├── architecture/        # Architecture documents
+│   ├── stories/             # Development stories
+│   ├── architecture.md      # Complete architecture
+│   ├── implementation-plan.md
+│   └── prd.md               # Product requirements
+│
+├── services/                # Backend Microservices
+│   ├── ApiGateway/          # YARP API Gateway
+│   ├── UserService/         # User authentication & profiles
+│   │   ├── UserService.API/
+│   │   ├── UserService.Core/
+│   │   └── UserService.Infrastructure/
+│   ├── TransactionService/  # Transactions & CSV import
+│   │   ├── TransactionService.API/
+│   │   ├── TransactionService.Core/
+│   │   └── TransactionService.Infrastructure/
+│   ├── AIService/           # AI categorization & insights
+│   │   ├── AIService.API/
+│   │   ├── AIService.Core/
+│   │   └── AIService.Infrastructure/
+│   ├── BudgetService/       # Budget tracking & alerts
+│   │   ├── BudgetService.API/
+│   │   ├── BudgetService.Core/
+│   │   └── BudgetService.Infrastructure/
+│   └── NotificationService/ # Email & in-app notifications
+│       ├── NotificationService.API/
+│       ├── NotificationService.Core/
+│       └── NotificationService.Infrastructure/
+│
+├── shared/                  # Shared code across services
+│   ├── Contracts/           # RabbitMQ message contracts
+│   ├── Common/              # Common utilities (C#)
+│   └── Types/               # Shared TypeScript types
+│
+├── frontend/                # Frontend applications
+│   └── web/                 # React 18 + TypeScript app
+│
+├── infrastructure/          # Infrastructure as code
+│   ├── docker/              # Docker Compose configs
+│   ├── scripts/             # Development/deployment scripts
+│   └── monitoring/          # Prometheus/Grafana configs
+│
+├── tests/                   # Automated tests
+│   ├── integration/         # Integration tests (Testcontainers)
+│   └── e2e/                 # End-to-end tests (Playwright)
+│
+├── .editorconfig            # Editor configuration
+├── .gitignore               # Git ignore rules
+└── README.md                # Project README (to be created)
+
+Status: ✅ Monorepo structure complete

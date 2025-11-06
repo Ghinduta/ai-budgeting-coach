@@ -1,0 +1,43 @@
+markdownExploder: true
+qa:
+  qaLocation: docs/qa
+prd:
+  prdFile: docs/prd.md
+  prdVersion: v4
+  prdSharded: true
+  prdShardedLocation: docs/prd
+  epicFilePattern: epic-{n}*.md
+architecture:
+  architectureFile: docs/architecture.md
+  architectureVersion: v4
+  architectureSharded: true
+  architectureShardedLocation: docs/architecture
+customTechnicalDocuments: docs/devops/deployment-plan.md
+devLoadAlwaysFiles:
+  - docs/architecture/coding-standards.md
+  - docs/architecture/tech-stack.md
+  - docs/architecture/source-tree.md
+devDebugLog: .ai/debug-log.md
+devStoryLocation: docs/stories
+slashPrefix: BMad
+
+continuous:
+  mode: manual
+  stop_after_each_epic: true
+  review_required: true
+  orchestrator: bmad-orchestrator
+  agents:
+    - analyst
+    - pm
+    - architect
+    - dev
+    - qa
+  documents:
+    - docs/idea.md
+    - docs/brief.md
+    - docs/prd.md
+    - docs/architecture.md
+    - docs/implementation-plan.md
+    - docs/deployment-plan.md
+    - docs/test-plan.md
+    - docs/stories.md

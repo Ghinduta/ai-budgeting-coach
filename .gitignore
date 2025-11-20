@@ -1,5 +1,13 @@
 # AI Budgeting Coach - .gitignore
 
+## Local-only folders (not tracked in git)
+.bmad-core/
+.claude/
+docs/
+
+## Windows reserved names
+nul
+
 ## .NET / C#
 bin/
 obj/

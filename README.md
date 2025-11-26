@@ -73,71 +73,123 @@ Before you begin, ensure you have the following installed:
 
 ## Quick Start
 
+Follow these steps to get the application running locally:
+
 ### 1. Clone the Repository
 ```bash
 git clone https://github.com/yourusername/ai-budgeting-coach.git
 cd ai-budgeting-coach
 ```
 
-### 2. Configure Environment Variables
-```bash
-# Copy the example environment file
-cp .env.example .env
+### 2. Start Docker Infrastructure
 
-# Edit .env and add your API keys
-# OPENAI_API_KEY=your-key-here
-# SENDGRID_API_KEY=your-key-here (optional)
-```
-
-### 3. Start Infrastructure Services
-
-**Linux/macOS:**
-```bash
-./infrastructure/scripts/setup-dev.sh
-```
-
-**Windows:**
-```powershell
-.\infrastructure\scripts\setup-dev.ps1
-```
-
-This will start:
-- PostgreSQL (localhost:5432)
-- RabbitMQ (localhost:5672, UI at http://localhost:15672)
-- Prometheus (http://localhost:9090)
-- Grafana (http://localhost:3000)
-
-### 4. Build Backend Services
+Start PostgreSQL, RabbitMQ, Prometheus, and Grafana using Docker Compose:
 
 ```bash
-# Restore dependencies and build
-dotnet restore BudgetCoach.sln
-dotnet build BudgetCoach.sln --configuration Release
-
-# Run a service (example: User Service)
-cd backend/services/UserService/UserService.API
-dotnet run
+docker-compose up -d
 ```
 
-### 5. Build Frontend Application
+**Check if services are running:**
+```bash
+docker-compose ps
+```
+
+**View logs (optional):**
+```bash
+docker-compose logs -f
+```
+
+**Stop services when done:**
+```bash
+docker-compose down
+```
+
+### 3. Run Frontend Application
 
 ```bash
 cd frontend/web
-npm install
+npm install        # Only needed first time
 npm run dev
 ```
 
-The frontend will be available at http://localhost:5173
+The frontend will be available at **http://localhost:5173**
 
-## Service URLs
+### 4. Run Backend Services (Coming Soon)
 
-| Service | URL | Default Credentials |
-|---------|-----|---------------------|
-| PostgreSQL | localhost:5432 | budgetcoach / budgetcoach |
-| RabbitMQ AMQP | localhost:5672 | guest / guest |
-| RabbitMQ Management UI | http://localhost:15672 | guest / guest |
-| Prometheus | http://localhost:9090 | (no auth) |
-| Grafana | http://localhost:3000 | admin / admin |
+Backend microservices are under development. Once ready, you can run individual services:
+
+```bash
+# Example: User Service
+cd services/UserService/UserService.API
+dotnet run
+```
+
+## Available Service URLs
+
+Once Docker is running, you can access these services:
+
+| Service | URL | Credentials | Description |
+|---------|-----|-------------|-------------|
+| **Frontend (Vite)** | http://localhost:5173 | - | React application |
+| **PostgreSQL** | localhost:5432 | `budgetcoach` / `budgetcoach` | Database |
+| **RabbitMQ AMQP** | localhost:5672 | `guest` / `guest` | Message broker |
+| **RabbitMQ Management UI** | http://localhost:15672 | `guest` / `guest` | RabbitMQ dashboard |
+| **Prometheus** | http://localhost:9090 | - | Metrics collection |
+| **Grafana** | http://localhost:3000 | `admin` / `admin` | Monitoring dashboards |
+
+## Common Commands
+
+### Docker
+```bash
+# Start all infrastructure services
+docker-compose up -d
+
+# Stop all services
+docker-compose down
+
+# View service status
+docker-compose ps
+
+# View logs
+docker-compose logs -f [service-name]
+
+# Restart a specific service
+docker-compose restart [service-name]
+```
+
+### Frontend
+```bash
+cd frontend/web
+
+# Development
+npm run dev              # Start dev server
+npm run build           # Build for production
+npm run preview         # Preview production build
+
+# Testing
+npm test                # Run tests
+npm run test:ui         # Run tests with UI
+npm run test:coverage   # Generate coverage report
+
+# Code Quality
+npm run lint            # Check for linting errors
+npm run lint:fix        # Auto-fix linting errors
+npm run format          # Format code with Prettier
+npm run format:check    # Check code formatting
+```
+
+### Backend (when services are ready)
+```bash
+# Build solution
+dotnet build BudgetCoach.sln
+
+# Run tests
+dotnet test BudgetCoach.sln
+
+# Run a specific service
+cd services/[ServiceName]/[ServiceName].API
+dotnet run
+```
 
 ## Development
 
